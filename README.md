@@ -62,7 +62,7 @@ Follow the setup instructions from [Spleeter](https://github.com/deezer/spleeter
 Run the voice extraction process to filter background audio in audio-files located in `raw_audio/`.
 
 ```shell
-python -m ms-audio --audio-extract-voice
+python -m transcripy --audio-extract-voice
 ```
 
 Optional arguments:
@@ -86,7 +86,7 @@ Follow the setup instructions from [OpenAI Whisper](https://github.com/openai/wh
 Run the transcription of audio-files (.wav only!) located in  `raw_audio_voices/` with
 
 ```shell
-python -m ms-audio --audio-to-text 
+python -m transcripy --audio-to-text 
 ```
 
 Optional arguments:
@@ -106,7 +106,7 @@ Follow the setup instructions from [Pyannote-Audio](https://github.com/pyannote/
 Run the diarization process to detect multiple readers in audio-files located in `raw_audio_voices/`.
 
 ```shell
-python -m ms-audio --audio-to-voices 
+python -m transcripy --audio-to-voices 
 ```
 
 Optional arguments:
@@ -121,7 +121,7 @@ Optional arguments:
 To rename the speakers of the audio-files, run
 
 ```shell
-python -m ms-audio --set-speakers
+python -m transcripy --set-speakers
 ```
 
 ___
@@ -137,7 +137,7 @@ Create the data you need.
 Create transcriptions in various formats with
 
 ```shell
-python -m ms-audio --transcribe
+python -m transcripy --transcribe
 ```
 
 ### Analysis
@@ -145,7 +145,7 @@ python -m ms-audio --transcribe
 Create HTML files for visualization of the results with
 
 ```shell
-python -m ms-audio --viewer
+python -m transcripy --viewer
 ```
 
 ### Slice
@@ -153,7 +153,7 @@ python -m ms-audio --viewer
 Slice the audio files in separate text-slices with
 
 ```shell
-python -m ms-audio --slice
+python -m transcripy --slice
 ```
 
 ___
