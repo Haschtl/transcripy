@@ -1,7 +1,9 @@
+import os
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 from spleeter.separator import Separator
 from spleeter.audio.adapter import AudioAdapter
 
-import os
 from typing import Any, Dict, TypedDict, Tuple, cast
 
 from .helper import MultiFileHandler

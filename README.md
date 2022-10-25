@@ -29,7 +29,7 @@ scoop install ffmpeg
 Install python dependencies
 
 ```shell
-pip3 install tqdm setuptools-rust pycaption colour plotly mutagen pydub spleeter pyannotate.audio git+https://github.com/openai/whisper.git 
+pip3 install tqdm setuptools-rust pycaption simple-term-menu colour plotly mutagen pydub spleeter pyannotate.audio git+https://github.com/openai/whisper.git 
 ```
 
 ___

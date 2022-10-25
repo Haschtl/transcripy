@@ -1,0 +1,3 @@
+[submodule "transcripy/voiceSynthesizer"]
+	path = transcripy/voiceSynthesizer
+	url = https://github.com/CorentinJ/Real-Time-Voice-Cloning
