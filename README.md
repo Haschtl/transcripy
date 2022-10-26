@@ -29,7 +29,7 @@ scoop install ffmpeg
 Install python dependencies
 
 ```shell
-pip3 install tqdm setuptools-rust pycaption simple-term-menu colour plotly mutagen pydub spleeter pyannotate.audio git+https://github.com/openai/whisper.git 
+pip3 install tqdm setuptools-rust pycaption simpleaudio simple-term-menu colour plotly mutagen pydub spleeter pyannotate.audio git+https://github.com/openai/whisper.git 
 ```
 
 ___
@@ -159,6 +159,16 @@ python -m transcripy --slice
 ___
 
 ## Extra: Text to speech synthetis
+
+### Option 1: Voice Cloning App
+
+- Download the executable for [Voice-Cloning-App](https://github.com/BenAAndrew/Voice-Cloning-App)
+- Start it
+- Download model for your language
+- Create dataset for one speaker with `python -m create-dataset <SPEAKER>`
+- Load the dataset into Voice-Cloning-App
+
+### Option 2: Real Time Voice Cloning
 
 Follow the setup instructions from [Real-Time Voice Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning).
 

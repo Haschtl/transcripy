@@ -33,9 +33,10 @@ class MultiSpeakerSetter(MultiFileHandler):
                 t2 = int((d["start"]+d["duration"])*1000 +
                          self.extra_ms+self.earlier_ms)
                 a: AudioSegment = audio_file[t1:t2]
+                print(f'Playing sample of {d["speaker"]}...')
                 play(a)
                 new_speaker = input(
-                    f"Enter a new name for this speaker: {d['speaker']}. Leave blank to skip. ")
+                    f"Enter a new name for this speaker. Leave blank to skip. ")
                 if new_speaker != "":
                     overwrite["rename"][overwrite["rename"].index(
                         d["speaker"])]

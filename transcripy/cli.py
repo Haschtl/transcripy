@@ -19,8 +19,11 @@ def main():
     parser.add_argument("--text-to-splits", default=False, action='store_true',
                         help="Split voices (after --audio-2-text and --audio-2-voices)")
 
+    parser.add_argument("--create-dataset", default=None, type=str,
+                        help="Create dataset for voice-cloning")
+
     parser.add_argument("--slice", default=False, action='store_true',
-                        help="Split voices (after --audio-2-text and --audio-2-voices)")
+                        help="Create slices of .wav files")
     parser.add_argument("--viewer",  default=False, action='store_true',
                         help="Open viewer GUI")
     parser.add_argument("--transcribe",  default=False, action='store_true',
@@ -89,6 +92,14 @@ def main():
         from .sliceAudio import MultiSlicer
         MultiSlicer(data_path, verbose=verbose, pre=args.pre *
                     1000, post=args.post*1000).run()
+    if args.create_dataset is not None:
+        from .createDataset import DatasetCreator
+        c = DatasetCreator(data_path, args.create_dataset, verbose=verbose, pre=args.pre *
+                    1000, post=args.post*1000)
+        c.run()
+        c.sample_statistics()
+        c.process_samples()
+
     if args.voice_synthesis:
         from .synthesizer import run
         run()

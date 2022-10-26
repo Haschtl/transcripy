@@ -204,3 +204,54 @@ class MultiVoiceSplitter(MultiFileHandler):
                     f.write(txt_transcript)
             except Exception:
                 pass
+
+
+def transcribe(segments: List[Segment], output_path:str, language: str = "english") -> None:
+    splits: Dict[str, List[Segment]] = {}
+    last_speaker = ""
+    captions: List[Caption] = []
+    for segment in segments:
+        end = segment["end"]
+        start = segment["start"]
+        nodes = [CaptionNode(
+            CaptionNode.TEXT, content=segment["text"])]
+        captions.append(Caption(start*1000000, end*1000000, nodes))
+
+        if last_speaker not in splits:
+            splits[last_speaker] = []
+        splits[last_speaker].append(
+            {"start": segment["start"], "end": segment["end"], "text": segment["text"]})
+    captionSet = CaptionSet({language: CaptionList(captions)})
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    srt = SRTWriter().write(captionSet)
+    sami = SAMIWriter().write(captionSet)
+    dfx = DFXPWriter().write(captionSet)
+    transcript = TranscriptWriter().write(captionSet)
+    txt_transcript = f"# Language: {language}"
+    for c in captions:
+        txt_transcript += f"\n{c.format_start()} - {c.format_end()}: {c.get_text()}"
+    try:
+        with open(output_path.replace(".json", ".srt"), "w") as f:
+            f.write(srt)
+    except Exception:
+        pass
+    try:
+        with open(output_path.replace(".json", ".sami"), "w") as f:
+            f.write(sami)
+    except Exception:
+        pass
+    try:
+        with open(output_path.replace(".json", ".dfx"), "w") as f:
+            f.write(dfx)
+    except Exception:
+        pass
+    try:
+        with open(output_path.replace(".json", ".transc"), "w") as f:
+            f.write(transcript)
+    except Exception:
+        pass
+    try:
+        with open(output_path.replace(".json", ".txt"), "w") as f:
+            f.write(txt_transcript)
+    except Exception:
+        pass

@@ -61,6 +61,15 @@ def slice(data_path: str, verbose: bool = False, pre: float = 0, post: float = 0
                 1000, post=post*1000).run()
 
 
+def create_dataset(data_path: str, verbose: bool = False, pre: float = 0, post: float = 0) -> None:
+    from .createDataset import DatasetCreator
+    speaker = input('Select a speaker name: ')
+    c = DatasetCreator(data_path, speaker, verbose=verbose, pre=pre *
+                       1000, post=post*1000)
+    c.run()
+    c.sample_statistics()
+    c.process_samples()
+
 def voice_synthesis():
     from .synthesizer import run
     run()
@@ -81,6 +90,7 @@ def main():
         ["  Transcribe", transcribe, [data_path, verbose]],
         ["  Analyse", viewer, [data_path, verbose]],
         ["  Slice WAV", slice, [data_path, verbose]],
+        ["  Create dataset", create_dataset, [data_path, verbose]],
         ["Voice Synthesis", voice_synthesis, []],
         # ["Set data-folder",,[data_path, verbose]],
     ]
