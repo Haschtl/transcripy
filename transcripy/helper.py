@@ -52,7 +52,19 @@ class MultiFileHandler:
         pass
 
     def run(self):
+        files=[]
         for idx, file in tqdm(enumerate(self.files)):
+            if self.output_filetype is not None:
+                output_file = os.path.splitext(
+                    os.path.join(self.output_dir, file))[0]+'.'+self.output_filetype
+            else:
+                output_file = self.output_dir
+            if not self.ignore_existing and not os.path.isfile(output_file):
+                files.append(file)
+            else:
+                print(f"File exists. Skipping... ({output_file})")
+
+        for idx, file in tqdm(enumerate(files)):
             if self.output_filetype is not None:
                 output_file = os.path.splitext(
                     os.path.join(self.output_dir, file))[0]+'.'+self.output_filetype
