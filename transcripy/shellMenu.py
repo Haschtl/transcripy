@@ -39,6 +39,11 @@ def set_speakers(data_path: str, verbose: bool = False) -> None:
     from .setSpeakers import MultiSpeakerSetter
     MultiSpeakerSetter(data_path, verbose=verbose).run()
 
+def map_speakers(data_path: str, verbose: bool = False) -> None:
+    from .mapSpeakers import MultiSpeakerMapper
+    c = MultiSpeakerMapper(data_path, verbose=verbose)
+    c.run()
+    c.process()
 
 def text_to_splits(data_path: str, verbose: bool = False) -> None:
     from .text2splits import MultiVoiceSplitter
@@ -85,6 +90,7 @@ def main():
         ["Speech recognition", audio_to_text, [data_path, verbose, model]],
         ["Diarization (speaker)", audio_to_voices, [
             data_path, verbose, model]],
+        ["[Map Speakers]", map_speakers, [data_path, verbose]],
         ["[Assign Speakers]", set_speakers, [data_path, verbose]],
         ["Combine data", text_to_splits, [data_path, verbose]],
         ["  Transcribe", transcribe, [data_path, verbose]],

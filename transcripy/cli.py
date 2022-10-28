@@ -13,6 +13,9 @@ def main():
     parser.add_argument("--preprocess",  default=False, action='store_true',
                         help="Additional space before splits for --slice")
 
+    parser.add_argument("--map-speakers",  default=False, action='store_true',
+                        help="Map speakers between files")
+
     parser.add_argument("--set-speakers",  default=False, action='store_true',
                         help="Set speakers for diarization")
 
@@ -37,6 +40,8 @@ def main():
                         help="Additional space before splits for --slice")
     parser.add_argument("--post",  type=float, default=0.2,
                         help="Additional space after splits for --slice")
+    parser.add_argument("--threshold",  type=float, default=0.2,
+                        help="Threshold for --map-speakers")
     parser.add_argument("--voice-synthesis",  default=False, action='store_true',
                         help="Open voice-synthesis GUI")
     parser.add_argument("--data-path", type=str, default=os.path.join(os.path.dirname(os.path.dirname(__file__)), "data"),
@@ -77,6 +82,12 @@ def main():
     if args.set_speakers:
         from .setSpeakers import MultiSpeakerSetter
         MultiSpeakerSetter(data_path, verbose=verbose).run()
+
+    if args.map_speakers:
+        from .mapSpeakers import MultiSpeakerMapper
+        c= MultiSpeakerMapper(data_path, verbose=verbose)
+        c.run()
+        c.process(args.threshold)
 
     if args.text_to_splits:
         from .text2splits import MultiVoiceSplitter
