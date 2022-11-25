@@ -59,7 +59,7 @@ class MultiFileHandler:
                     os.path.join(self.output_dir, file))[0]+'.'+self.output_filetype
             else:
                 output_file = self.output_dir
-            if not self.ignore_existing and not os.path.isfile(output_file):
+            if self.ignore_existing or not os.path.isfile(output_file):
                 files.append(file)
             else:
                 print(f"File exists. Skipping... ({output_file})")
@@ -73,7 +73,7 @@ class MultiFileHandler:
                 os.makedirs(self.output_dir, exist_ok=True)
                 output_file = self.output_dir
             input_file = os.path.join(self.input_dir, file)
-            if not self.ignore_existing and not os.path.isfile(output_file):
+            if self.ignore_existing or not os.path.isfile(output_file):
                 if self.verbose:
                     print(f"Processing {input_file}\nOutput: {output_file}")
                 self.handler(input_file, output_file, idx)
